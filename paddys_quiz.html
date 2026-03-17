@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Irish Meanings Quiz</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+      background: #f7f7fb;
+      color: #222;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #555;
+    }
+    .question {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem 1.2rem 1.2rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .question p {
+      margin: 0 0 0.75rem;
+      font-weight: 600;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .options button {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: #fafafa;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.05s;
+      font-size: 0.95rem;
+    }
+    .options button:hover {
+      background: #f0f0ff;
+      border-color: #777;
+    }
+    .options button.correct {
+      background: #d9f7be;
+      border-color: #52c41a;
+      color: #135200;
+    }
+    .options button.incorrect {
+      background: #ffd8bf;
+      border-color: #fa541c;
+      color: #871400;
+    }
+    .options button:disabled {
+      cursor: default;
+      opacity: 0.9;
+    }
+    .feedback {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .feedback.correct {
+      color: #237804;
+    }
+    .feedback.incorrect {
+      color: #cf1322;
+    }
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <h1>Irish Meanings Quiz</h1>
+  <div class="subtitle">Click an answer to see instantly if you’re right.</div>
+
+  <!-- Question template:
+       data-correct holds the index (0-based) of the correct option -->
+  <div class="question" data-correct="1">
+    <p>1. Fás aon oíche = grown in one night.</p>
+    <div class="options">
+      <button>Fungus</button>
+      <button>Mushrooms</button>
+      <button>Fruit flies</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="2">
+    <p>2. Smugairle Róin = seal's snot.</p>
+    <div class="options">
+      <button>Slug</button>
+      <button>Squid</button>
+      <button>Jellyfish</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="1">
+    <p>3. Póigíní gréine = little kisses of sunshine.</p>
+    <div class="options">
+      <button>Sunflowers</button>
+      <button>Freckles</button>
+      <button>Rays of sunshine coming through the clouds</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="0">
+    <p>4. Madra creann = tree dog.</p>
+    <div class="options">
+      <button>Squirrel</button>
+      <button>Monkey</button>
+      <button>Sloth</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="2">
+    <p>5. Bóin Dé = God's little cow.</p>
+    <div class="options">
+      <button>Donkey</button>
+      <button>Wolfhound</button>
+      <button>Ladybug</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="0">
+    <p>6. Uisce beatha = blessed water.</p>
+    <div class="options">
+      <button>Whiskey</button>
+      <button>Tea</button>
+      <button>Guinness</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="2">
+    <p>7. Seilide = thing that spits.</p>
+    <div class="options">
+      <button>Fountain</button>
+      <button>Llama</button>
+      <button>Snail</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="1">
+    <p>8. Madra uisce = water dog.</p>
+    <div class="options">
+      <button>Seal</button>
+      <button>Otter</button>
+      <button>Whale</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="0">
+    <p>9. Damhán alla = little ox of the wall.</p>
+    <div class="options">
+      <button>Spider</button>
+      <button>Spy</button>
+      <button>Peephole</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-correct="1">
+    <p>10. Máthair shúigh mhór = big mother of suck.</p>
+    <div class="options">
+      <button>Vacuum cleaner</button>
+      <button>Giant squid</button>
+      <button>England</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="footer">
+    Share this file directly or host it on SharePoint/Teams/any web server.
+  </div>
+
+  <script>
+    document.querySelectorAll(".question").forEach(function (q) {
+      const correctIndex = parseInt(q.getAttribute("data-correct"), 10);
+      const buttons = q.querySelectorAll(".options button");
+      const feedback = q.querySelector(".feedback");
+
+      buttons.forEach(function (btn, index) {
+        btn.addEventListener("click", function () {
+          // Disable all buttons after first choice
+          buttons.forEach(b => b.disabled = true);
+
+          if (index === correctIndex) {
+            btn.classList.add("correct");
+            feedback.textContent = "Correct!";
+            feedback.classList.add("correct");
+          } else {
+            btn.classList.add("incorrect");
+            buttons[correctIndex].classList.add("correct");
+            feedback.textContent = "Incorrect – the correct answer is: " + buttons[correctIndex].textContent + ".";
+            feedback.classList.add("incorrect");
+          }
+        }, { once: true });
+      });
+    });
+  </script>
+</body>
+</html>
